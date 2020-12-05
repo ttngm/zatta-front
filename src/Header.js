@@ -20,7 +20,7 @@ function Header() {
     return (
         <div className="header">
             <Grid item xs={10}>
-                <h1>Zatta</h1>
+                <h1><span>Z</span>atta</h1>
             </Grid>
 
             <Grid item xs={1}>

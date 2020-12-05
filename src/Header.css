@@ -10,6 +10,10 @@
     margin-top: 5px;
 }
 
+.header span {
+    color: blue;
+}
+
 #user {
     position: relative;
     top: 20%;
