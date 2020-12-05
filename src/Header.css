@@ -2,4 +2,24 @@
     display: flex;
     background-color: gray;
     height: 5rem;
+    justify-content: space-between;
+}
+
+.header h1 {
+    font-size: 50px;
+    margin-top: 5px;
+}
+
+#user {
+    position: relative;
+    top: 20%;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+#menu {
+    display: flex;
+	align-items: center;
+	justify-content: center;
 }
