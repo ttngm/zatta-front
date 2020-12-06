@@ -5,6 +5,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Grid from '@material-ui/core/Grid'
+import { Link } from 'react-router-dom'
 
 function Header() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,9 +40,9 @@ function Header() {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
-                    <MenuItem onClick={handleClose}>Home</MenuItem>
+                    <MenuItem onClick={handleClose}><Link to="/">Home</Link></MenuItem>
                     <MenuItem onClick={handleClose}>検索設定(Fess)</MenuItem>
-                    <MenuItem onClick={handleClose}>キーワード登録</MenuItem>
+                    <MenuItem onClick={handleClose}><Link to="/registKeyword">キーワード登録</Link></MenuItem>
                     <MenuItem onClick={handleClose}>ログアウト</MenuItem>
                 </Menu>
             </Grid>
