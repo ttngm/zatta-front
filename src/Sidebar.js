@@ -28,7 +28,7 @@ function Sidebar() {
     return (
         <div className="sidebar">
             <List>
-                {["React", "Java", "人工知能", "AWS", "React", "Java", "人工知能", "AWS"].map((value, index) => {
+                {["React", "Java", "人工知能", "AWS", "test1", "test2", "test3", "test4"].map((value, index) => {
                     const labelId = `checkbox-list-label-${value}`;
 
                     return (

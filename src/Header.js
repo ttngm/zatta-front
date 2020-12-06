@@ -28,7 +28,7 @@ function Header() {
                 <span id='user'>user1</span>
             </Grid>
 
-            <Grid item xs={1}>
+            <Grid item xs={1} container alignItems="center">
 
                 <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                     <MenuIcon id='menu' fontSize="large" />
