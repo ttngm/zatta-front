@@ -1,0 +1,15 @@
+.register-part {
+    display: flex;
+    flex: 0.5;
+    height: 500px;
+}
+
+.register-part u{
+    display: flex;
+    width: 400px;
+}
+
+.register-part Button {
+    font-size: 20px;
+    height: 30px;
+}

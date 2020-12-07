@@ -1,0 +1,5 @@
+.wordList-part {
+    display: flex;
+    flex: 0.5;
+    height: 500px;
+}
