@@ -10,6 +10,7 @@ function RegisterPart() {
         <div className="register-part">
             <u><h1>キーワード登録</h1></u>
 
+
             <Grid
                 container
                 direction="row"
