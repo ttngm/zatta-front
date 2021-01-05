@@ -5,7 +5,14 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
+
+
 function RegisterPart() {
+
+    const registerWord = () => {
+        console.log("register!")
+    }
+
     return (
         <div className="register-part">
             <u><h1>キーワード登録</h1></u>
@@ -17,7 +24,7 @@ function RegisterPart() {
                 justify="center"
                 alignItems="center">
                 <TextField id="outlined-basic" label="word" varient="outlined" />
-                <Button variant="contained" color="primary">登録</Button>
+                <Button variant="contained" color="primary" onClick={registerWord}>登録</Button>
             </Grid>
 
         </div>
