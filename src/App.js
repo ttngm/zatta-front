@@ -1,17 +1,20 @@
-import React from 'react';
-import './App.css';
-import Header from './Header';
-import Home from './Home';
-import RegistKeywordPage from './RegistKeywordPage';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React from "react";
+import "./App.css";
+import Login from "./Login";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AutenticatedRoute from "./AuthenticatedRoute";
+import AuthenticatedGuard from "./AuthenticatedGuard";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Header />
-        <Route exact path='/' component={Home} />
-        <Route path='/registKeyword' component={RegistKeywordPage} />
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <AuthenticatedGuard>
+          <AutenticatedRoute />
+          </AuthenticatedGuard>
+        </Switch>
       </Router>
     </div>
   );
