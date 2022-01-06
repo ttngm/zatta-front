@@ -50,7 +50,7 @@ const WordListPart = () => {
 
   const rows = [];
   const renderedKeywords = keywords.map((keyword, index) =>
-    rows.push(createData(index, keyword.keyword, "xxxx/xx/xx"))
+    rows.push(createData(index+1, keyword.keyword, "xxxx/xx/xx"))
   );
 
   const deleteKeyword = (keyword) => {
