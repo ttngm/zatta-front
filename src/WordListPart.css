@@ -1,6 +1,5 @@
 .wordList-part {
     flex: 0.5;
-    height: 500px;
 }
 .wordList-part u{
     display: flex;
