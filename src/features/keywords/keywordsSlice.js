@@ -13,16 +13,20 @@ export const fetchKeywords = createAsyncThunk(
 
 export const registKeyword = createAsyncThunk(
   "keywords/registKeyword",
-  async (keyword) => {
-    const response = await fetch("/keyword", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
-      body: JSON.stringify(keyword),
-    });
-    const result = await response.json();
-    return result;
+  async (keyword, { rejectWithValue }) => {
+      const response = await fetch("/keyword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify(keyword),
+      });
+      const result = await response.json();
+      if(result.errorMessage){
+        return rejectWithValue(result.errorMessage)
+      } else {
+        return result;
+      }
   }
 );
 
@@ -36,7 +40,9 @@ export const counterSlice = createSlice({
     },
     [registKeyword.fulfilled]: (state, action) => {
       return action.payload;
-
+    },
+    [registKeyword.rejected]: (state, action) => {
+      // エラー時はstoreを更新しないため、何もreturnしない
     },
   },
 });

@@ -4,6 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registKeyword } from "./features/keywords/keywordsSlice";
@@ -11,16 +14,40 @@ function RegisterPart() {
   const dispatch = useDispatch();
 
   const [keyword, setKeyword] = useState('');
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleChange = (event) => {
     setKeyword(event.target.value);
   };
 
-  const handleSubmit = async(event) => {
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+  const handleSubmit = async (event) => {
     // formのデフォルト動作をキャンセル
     event.preventDefault();
 
-    await dispatch(registKeyword({ keyword }));
+    let resultAction = await dispatch(registKeyword({ keyword }));
+    if (registKeyword.fulfilled.match(resultAction)) {
+      setOpen(false);
+      setMessage("登録成功");
+      setSeverity("success");
+      setOpen(true);
+    } else if (registKeyword.rejected.match(resultAction)) {
+      setOpen(false);
+      setMessage(resultAction.payload);
+      setSeverity("warning");
+      setOpen(true);
+    }
     // fetch("/keyword", {
     //   method: "POST",
     //   headers: {
@@ -68,6 +95,19 @@ function RegisterPart() {
           </Button>
         </form>
       </Grid>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity={severity}>
+          {message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
