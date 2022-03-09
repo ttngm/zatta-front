@@ -11,6 +11,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import {
   fetchKeywords,
   selectAllKeywords,
@@ -54,9 +56,50 @@ const WordListPart = () => {
   );
 
   const deleteKeyword = (keyword) => {
-    // 削除API
-    console.log("delete:" + keyword);
+    fetch("/keyword", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        keyword: keyword,
+      }),
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          dispatch(fetchKeywords());
+          setOpen(false);
+          setMessage("削除成功");
+          setSeverity("success");
+          setOpen(true);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          setOpen(false);
+          setMessage("削除失敗");
+          setSeverity("warning");
+          setOpen(true);
+        }
+      );
   };
+
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 
   return (
     <div className="wordList-part">
@@ -89,6 +132,19 @@ const WordListPart = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity={severity}>
+          {message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
