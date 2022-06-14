@@ -1,5 +1,9 @@
 .sidebar {
     flex: 0.2;
-    background-color:lightgray
+    background-color: white;
 
+}
+
+div.listItem {
+    margin:0 10px 10px 10px;
 }
